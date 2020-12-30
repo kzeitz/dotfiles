@@ -1,0 +1,67 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	
+[user]
+	email = karlton.zeitz@enverus.com
+	name = Karlton Zeitz
+
+[core]
+        excludesfile = ~/.gitignore_global
+        pager = less -F -X
+        
+[alias]
+    # add
+        aa = add -A
+    # branch
+        b = branch
+        ba = branch -a
+        bd = branch -D
+        bm = branch -m
+        br = branch -r
+        buu = branch --unset-upstream
+        bv = branch -v
+    # checkout
+        cb = checkout -b
+        co = checkout
+        cod = checkout develop
+        com = checkout master
+    # clean
+        cf = clean -f
+    # commit
+        cm = commit -m
+        dave = log --pretty=format:'%h - %ae, %ar : %s'
+    # diff
+        d = diff
+    # log
+        l = --no-pager log
+        lg = log --oneline --graph
+        # lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    # merge
+        m = merge
+    # pull
+        p = pull
+    # remote
+        rpo = remote prune origin
+    # reset
+        rhom = reset --hard origin/master
+        rh = reset HEAD
+    # status
+        s = status
+
+[status]
+        submoduleSummary = true
+
+[diff]
+        submodule = log
+
+[pull]
+        rebase = true
+
+[url "git@git.drillinginfo.com:"]
+        insteadOf = https://git.drillinginfo.com/
+
+[hub]
+        host = git.drillinginfo.com
