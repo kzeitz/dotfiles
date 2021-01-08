@@ -15,7 +15,8 @@ antigen use oh-my-zsh
 ZSH_TMUX_AUTOSTART=true
 
 # Load the theme
-antigen theme denysdovhan/spaceship-prompt
+THEME=denysdovhan/spaceship-prompt 
+antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle tmux
 antigen bundle colored-man-pages
@@ -36,6 +37,7 @@ antigen bundle web-search
 #antigen bundle z
 antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen bundle zsh-users/zsh-history-substring-search ./zsh-history-substring-search.zsh
+antigen bundle safe-paste
 
 # NVM bundle
 export NVM_LAZY_LOAD=true
@@ -46,12 +48,16 @@ antigen bundle Sparragus/zsh-auto-nvm-use
 # Tell Antigen that you're done.
 antigen apply
 
+# Remove underline from zsh-users/zsh-syntax-highlighting
+(( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]=none
+ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+
 # Setup zsh-autosuggestions
 source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Load custom aliases
 [[ -s "$HOME/.bash_aliases" ]] && source "$HOME/.bash_aliases"
-
 
 #Kubernetes Tools zsh completion start
 autoload -U compaudit compinit bashcompinit
